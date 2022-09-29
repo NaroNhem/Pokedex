@@ -2,6 +2,7 @@ import { json, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function PokemonInfo(props) {
+    const typeName = props.type.join("/")
   return (
     <div>
       <h2>{props.name}</h2>
@@ -19,7 +20,8 @@ function PokemonInfo(props) {
       </div>
       <div class="info">
         <ul class="list-group list-group-horizontal-lg">
-            <li class="list-group-item">Type: {props.type} </li>
+            <li class="list-group-item">Type: {typeName} </li>
+            
             <li class="list-group-item">Weight: {props.weight} kg</li>
             <li class="list-group-item">Height: {props.height} meters</li>
         </ul>
