@@ -1,0 +1,59 @@
+.App {
+    background-color: white;
+    min-width: 440px;
+}
+
+h1 {
+    text-align: center;
+    background-color: #e45a52;
+    margin: 0%;
+    border-bottom: 1px solid black;
+}
+
+.pokedex {
+    background-color: #f2f2f2;
+    border:1px solid #e45a52;
+    min-width: 300px;
+    cursor: pointer;
+    text-decoration: none;
+}
+h2{
+    text-align: center;
+    font-size: 56px;
+}
+.card-title {
+    color: black;
+}
+.pokedex:hover {
+    background-color: #cacaca;
+}
+.id {
+    text-align: left;
+    color: grey;
+}
+
+.more {
+    margin-top: 12px;
+    border-radius: 6px;
+    border: 1px solid black;
+}
+.sprites {
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+}
+#frontSprite, #backSprite {
+    text-align: center;
+    height: 300px;
+    width: 200px;
+}
+.info{
+    display: flex;
+    justify-content: center;
+}
+@media only screen and (max-width: 912px) {
+    .row {
+      display: flex;
+      justify-content: center;
+    }
+  }
