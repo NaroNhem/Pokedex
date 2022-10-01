@@ -66,7 +66,6 @@ export function Pokedex() {
                   pokemon["name"].charAt(0).toUpperCase() +
                   pokemon["name"].slice(1)
                 } //Makes the the first letter of the pokemon uppercase
-                text="This is a pokemon"
                 id={getIDFromPokemon(pokemon)}
                 buttonText="Like"
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getIDFromPokemon(
