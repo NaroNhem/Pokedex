@@ -34,13 +34,14 @@ function PokemonInfo(props) {
         </div>
         <div className="statsCard">
           <div class="list-group card-body">
-            <li class="list-group-item"><h4>Stats</h4></li>
-            <li class="list-group-item">HP: {props.hp} </li>
-            <li class="list-group-item">Attack: {props.attack}</li>
-            <li class="list-group-item">Defense: {props.defense}</li>
-            <li class="list-group-item">Special Attack: {props.specialAttack}</li>
-            <li class="list-group-item">Special Defense: {props.specialDefense}</li>
-            <li class="list-group-item">Speed: {props.speed}</li>
+            <li class="list-group-item statsTitle"><h4 >Stats</h4></li>
+            <div className= "statBox"><li class="list-group-item statName">HP</li><li class="list-group-item statBar hp">{props.hp}</li></div>
+            <div className= "statBox"><li class="list-group-item statName">Attack</li><li class="list-group-item statBar atk">{props.attack}</li></div>
+            <div className= "statBox"><li class="list-group-item statName">Defense</li><li class="list-group-item statBar def">{props.defense}</li></div>
+            <div className= "statBox"><li class="list-group-item statName">Sp. Att</li><li class="list-group-item statBar spatk">{props.specialAttack}</li></div>
+            <div className= "statBox"><li class="list-group-item statName">Sp. Def</li><li class="list-group-item statBar spdef">{props.specialDefense}</li></div>
+            <div className= "statBox"><li class="list-group-item statName">Speed</li><li class="list-group-item statBar spd">{props.speed}</li></div>
+            <li class="list-group-item total">Total: {props.total}</li>
           </div>
         </div>
         </div>
@@ -56,12 +57,23 @@ function PokemonInfo(props) {
   );
 }
 
+
+function Stats (stat, value) {
+  const statsCard = document.getElementById('root')
+  statsCard.style.getPropertyValue(stat); //"--hp"
+  getComputedStyle(statsCard).getPropertyValue(stat);
+  statsCard.style.setProperty(stat, value)
+}
 export function PokemonDetails() {
+  
   const [pokemonList, setPokemonList] = useState([]);
+  let total = 0;
   const { id } = useParams();
   let float = id;
-  if (float < 100) {
+  if (float < 10) {
   float = "00" + float;
+  } else if (float < 100) {
+    float = "0" + float;
   }
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -76,6 +88,17 @@ export function PokemonDetails() {
     <>
       {pokemonList.map((pokemon) => {
         console.log(pokemon)
+        Stats("--hp",pokemon.stats[0].base_stat)
+        Stats("--atk",pokemon.stats[1].base_stat)
+        Stats("--def",pokemon.stats[2].base_stat)
+        Stats("--spatk",pokemon.stats[3].base_stat)
+        Stats("--spdef",pokemon.stats[4].base_stat)
+        Stats("--spd",pokemon.stats[5].base_stat)
+        
+        pokemon.stats.forEach(element => {
+          total += element.base_stat
+        })
+        Stats("--total",total)
         return (
           <>
           <PokemonInfo
@@ -96,6 +119,7 @@ export function PokemonDetails() {
             specialAttack = {pokemon.stats[3].base_stat}
             specialDefense = {pokemon.stats[4].base_stat}
             speed = {pokemon.stats[5].base_stat}
+            total = {total}
           />
           </>
         );

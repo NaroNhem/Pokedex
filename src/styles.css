@@ -1,3 +1,13 @@
+#root{
+    --hp: 0;
+    --atk:0;
+    --def: 0;
+    --spatk: 0;
+    --spdef: 0
+    --spd:0
+    --total:0
+
+}
 .App {
     background-color: white;
     min-width: 440px;
@@ -26,6 +36,7 @@ h2{
 .pkmnName {
     font-weight: 600;
     font-size: 32px;
+    margin-bottom: 0;
 }
 .card-title {
     color: black;
@@ -111,6 +122,20 @@ h2{
     grid-column: 1;
 }
 
+.statName {
+    width: 20%;
+    border-right: 0px;
+    border-top: 0px;
+}
+
+.statBox {
+    display: flex;
+    border-right: 1px solid #e9ecef;
+    border-radius: 5px;
+}
+.statBar {
+    width: 100%;
+}
 .statsCard {
     margin-left: 1rem;
     text-align: left;
@@ -120,6 +145,58 @@ h2{
 
 .list-group-item {
     padding: 1rem;
+}
+.statsTitle {
+    padding: 0.76rem;
+}
+.hp {
+    background: rgb(224,118,118);
+    background: linear-gradient(90deg, rgba(224,118,118,1) 0%, rgba(213,20,26,1) 100%);
+    width: calc(100% * var(--hp)/255);
+    border-radius: 5px;
+}
+.atk {
+    background: rgb(254,154,102);
+    background: linear-gradient(90deg, rgba(254,154,102,1) 0%, rgba(250,123,57,1) 100%);
+    width: calc(100% * var(--atk)/255);
+    border-radius: 5px;
+}
+.def {
+    background: rgb(247,219,108);
+    background: linear-gradient(90deg, rgba(247,219,108,1) 0%, rgba(231,187,18,1) 100%);
+    width: calc(100% * var(--def)/255);
+    border-radius: 5px;
+}
+.spatk {
+    background: rgb(179,232,67);
+    background: linear-gradient(90deg, rgba(179,232,67,1) 0%, rgba(119,172,8,1) 100%);
+    width: calc(100% * var(--spatk)/255);
+    border-radius: 5px;
+}
+.spdef {
+    background: rgb(65,154,249);
+    background: linear-gradient(90deg, rgba(65,154,249,1) 0%, rgba(18,114,216,1) 100%);
+    width: calc(100% * var(--spdef)/255);
+    border-radius: 5px;
+}
+.spd {
+    background: rgb(152,107,236);
+    background: linear-gradient(90deg, rgba(152,107,236,1) 0%, rgba(90,55,154,1) 85%);
+    width: calc(100% * var(--spd)/255);
+    border-radius: 5px;
+}
+.total {
+    width: 20%;
+    border:1px solid #e9ecef;
+    border-top: 0;
+}
+.list-group {
+    border-radius: 5px;
+}
+.list-group-item:last-child {
+    border-bottom-right-radius: 5px; 
+    border-bottom-left-radius: 5px;
+    
 }
 .midSection {
     display: grid;
