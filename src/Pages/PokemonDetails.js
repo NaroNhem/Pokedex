@@ -45,24 +45,33 @@ function PokemonInfo(props) {
           </div>
         </div>
         </div>
-        
       <ul class="list-group stats left">
             <li class="list-group-item">Type: {typeName} </li>
             <li class="list-group-item">Weight: {props.weight} kg</li>
             <li class="list-group-item">Height: {props.height} meters</li>
             <li class="list-group-item">Ability: {abilities}</li>
+      </ul>
+      <div className="moveTable">
+        <ul>
+          {props.array.map(element => <li>{element}</li>)}
         </ul>
-        
+      </div>
     </div>
   );
 }
 
-
-function Stats (stat, value) {
-  const statsCard = document.getElementById('root')
-  statsCard.style.getPropertyValue(stat); //"--hp"
+function Movelist(array) {
+  const moveList = []
+  array.forEach(element => {
+      moveList.push(element.move.name)
+  })
+  return moveList
+}
+function Stats (stat, value) { //takes in stat name which is the same name as the CSS var and the value parameter which the stat is to be set to
+  const statsCard = document.getElementById('root')//gets the element from the dom with "root" as parent
+  statsCard.style.getPropertyValue(stat); //"--hp" takes the element that shares the same name as the paramenter
   getComputedStyle(statsCard).getPropertyValue(stat);
-  statsCard.style.setProperty(stat, value)
+  statsCard.style.setProperty(stat, value)//sets the css variable to be the same as the value parameter
 }
 export function PokemonDetails() {
   
@@ -94,33 +103,35 @@ export function PokemonDetails() {
         Stats("--spatk",pokemon.stats[3].base_stat)
         Stats("--spdef",pokemon.stats[4].base_stat)
         Stats("--spd",pokemon.stats[5].base_stat)
-        
         pokemon.stats.forEach(element => {
           total += element.base_stat
         })
         Stats("--total",total)
+        const pokemonProps = {
+            srcMain: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+            name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
+            id:float,
+            srcShiny1:`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`,
+            srcShiny2:`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${id}.png`,
+            src:`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+            src2: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`,
+            weight:pokemon.weight,
+            height:pokemon.height,
+            type:pokemon.types.map((type) => type.type.name),
+            ability:pokemon.abilities.map((ability) => ability.ability.name),
+            hp:pokemon.stats[0].base_stat,
+            attack:pokemon.stats[1].base_stat,
+            defense:pokemon.stats[2].base_stat,
+            specialAttack:pokemon.stats[3].base_stat,
+            specialDefense:pokemon.stats[4].base_stat,
+            speed:pokemon.stats[5].base_stat,
+            total:total,
+            array: Movelist(pokemon.moves)
+          }
+        
         return (
           <>
-          <PokemonInfo
-            srcMain={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
-            name={pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-            id={float}
-            srcShiny1={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`}
-            srcShiny2={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${id}.png`}
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-            src2={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`}
-            weight={pokemon.weight}
-            height={pokemon.height}
-            type={pokemon.types.map((type) => type.type.name)}
-            ability={pokemon.abilities.map((ability) => ability.ability.name)}
-            hp = {pokemon.stats[0].base_stat}
-            attack = {pokemon.stats[1].base_stat}
-            defense = {pokemon.stats[2].base_stat}
-            specialAttack = {pokemon.stats[3].base_stat}
-            specialDefense = {pokemon.stats[4].base_stat}
-            speed = {pokemon.stats[5].base_stat}
-            total = {total}
-          />
+          <PokemonInfo {...pokemonProps}/>
           </>
         );
       })}

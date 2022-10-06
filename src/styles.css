@@ -204,7 +204,13 @@ h2{
     grid-template-rows: .5fr 1fr;
     grid-row: 2/4;
 }
-
+.moveTable {
+    grid-row: 2/4;
+    grid-column: 3;
+    background: aliceblue;
+    height: 75vh;
+    overflow: auto;
+}
 @media only screen and (max-width: 912px) {
     .row {
       display: flex;
