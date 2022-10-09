@@ -18,6 +18,8 @@ h1 {
     background-color: #e45a52;
     margin: 0%;
     border-bottom: 1px solid black;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .pokedex {
@@ -148,6 +150,10 @@ h2{
 }
 .statsTitle {
     padding: 0.76rem;
+    border: 1px solid black;
+    background-color: #f2f2f2;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 .hp {
     background: rgb(224,118,118);
@@ -205,11 +211,17 @@ h2{
     grid-row: 2/4;
 }
 .moveTable {
+    display: grid;
     grid-row: 2/4;
     grid-column: 3;
-    background: aliceblue;
     height: 75vh;
     overflow: auto;
+}
+th {
+    display: none;
+}
+.moveTitle {
+    position: fixed;
 }
 @media only screen and (max-width: 912px) {
     .row {

@@ -51,19 +51,43 @@ function PokemonInfo(props) {
             <li class="list-group-item">Height: {props.height} meters</li>
             <li class="list-group-item">Ability: {abilities}</li>
       </ul>
-      <div className="moveTable">
-        <ul>
-          {props.array.map(element => <li>{element}</li>)}
-        </ul>
+      <div class="moveTable">
+        <h3 className="moveTitle">Moves</h3>
+      <table class="table">
+        <thead >
+          <tr >
+            <th scope="col">Moveset</th>
+            <th scope="col">Method</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.array.map(element => <tr>
+            <td>{element.move.name}</td>
+            <td></td>
+            </tr>)}
+        </tbody>
+      </table>
       </div>
     </div>
   );
 }
 
-function Movelist(array) {
+function LastMethod(array) {
+  const method = [];
+  const sortMethod = array.map(element => element.version_group_details)
+  console.log(sortMethod)
+  sortMethod.forEach(element => {
+    let last = element.pop()
+    // method.push(last)
+  })
+  // console.log(method)
+  return method
+}
+function Movelist(array) { //Lets create a function that checks if a move is learnable through level up only. If it is, put the name of the move in an array and the level
+  // its learned in another array. We can combine both into 1 array and return it. This will allow us show the current information.
   const moveList = []
   array.forEach(element => {
-      moveList.push(element.move.name)
+      moveList.push(element)
   })
   return moveList
 }
@@ -126,7 +150,8 @@ export function PokemonDetails() {
             specialDefense:pokemon.stats[4].base_stat,
             speed:pokemon.stats[5].base_stat,
             total:total,
-            array: Movelist(pokemon.moves)
+            array: Movelist(pokemon.moves),
+            method: LastMethod(Movelist(pokemon.moves))
           }
         
         return (
